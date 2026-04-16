@@ -1,0 +1,26 @@
+# Multi-stage build for clean, small production image
+
+# --- Build stage ---
+FROM python:3.11-slim AS build
+WORKDIR /app
+
+# Install dependencies in a separate directory
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install --prefix=/install -r requirements.txt
+
+# Copy app code
+COPY ./app ./app
+
+# --- Final stage ---
+FROM python:3.11-slim
+WORKDIR /app
+
+# Copy installed dependencies from build stage
+COPY --from=build /install /usr/local
+
+# Copy app code
+COPY ./app ./app
+
+# Run server (no reload)
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

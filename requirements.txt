@@ -1,0 +1,38 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+#Core AI layer
+google-genai>=0.3.0
+google-api-core
+groq
+
+# Core AI Orchestration
+langchain>=0.3.0
+langchain-core
+langchain-google-genai
+
+# Data & Vector Storage (For RAG)
+chromadb
+pypdf
+pandas
+
+# Infrastructure & Environment
+python-dotenv
+fastapi
+uvicorn
+
+# Vector Database(QDrant)
+qdrant-client
+
+# For tests
+pytest-asyncio
+
+# Celery & Redis
+celery
+redis
+
+python-multipart==0.0.8
+
+asgiref
+
+sentence-transformers
+torch>=2.0.0+cpu
+
